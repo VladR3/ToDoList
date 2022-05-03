@@ -1,0 +1,17 @@
+﻿@model ToDoList.ModelViews.CategoryMV
+<form  method="post" asp-action="Create" class="border border-2 p-3">
+    <div class="form-group">
+        <input type="text" name="nameCategory" class="form-control form-control-sm mb-4"/>
+    </div>
+        <input type = "submit" value="Create" class="btn btn-primary"/>
+</form>
+<h1 class="text-center">Categories</h1>
+@foreach (var item in Model.categoryList)
+{
+    <div class="card">
+      <div class="card-body">
+        <p class="card-text">@item.nameCategory</p>
+        <a href="/Category/Delete?id=@item.idCategory" class="btn btn-primary">Delete</a>
+      </div>
+    </div>
+}

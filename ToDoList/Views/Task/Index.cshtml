@@ -1,0 +1,85 @@
+﻿@model ToDoList.Models.TaskMV
+@{
+    DateTime dataTime = DateTime.Now;
+
+}
+
+<form  method="post" asp-action="Create" class="border border-2 p-3">
+    <div class="form-group">
+        <input type="text" name="text" class="form-control form-control-sm mb-4" required pattern="^.+$"/>
+    </div>
+        <label>Category: </label>
+        <select name = "idCategory" class="form-select form-select-sm" aria-label=".form-select-sm example">
+            @foreach (var item in Model.categoryModels)
+                {
+                    <option value="@item.idCategory">@item.nameCategory</option>
+                }
+        </select>
+        <label class="ml-3">Deadline: </label>
+        <input type="datetime-local" name = "deadLine" id = "date">
+        <label class="ml-3">Priority: </label>
+        <select name = "mark" class="form-select form-select-sm" aria-label=".form-select-sm example">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option selected value="4">4</option>
+        </select>
+        <input type = "submit" value="Create" class="btn btn-primary"/>
+</form>
+<h3 class="text-center">ActiveTasks</h3>
+@foreach (var item in Model.activeTaskList)
+{
+    <div class="card">
+      <div class="card-body">
+        <p class="card-text">@item.text</p>
+        <p class="card-text">Deadline: @item.deadLine</p>
+        <a href="/Task/Delete?id=@{@item.idTask}" class="btn btn-primary">Delete</a>
+        <input type="checkbox" id="myCheck" class="@item.idTask" onclick="myFunction()">
+      </div>
+    </div>
+}
+<h3 class="text-center">Completed Tasks</h3>
+@foreach (var item in Model.completedTaskList)
+{
+    <div class="card">
+      <div class="card-body">
+        <p class="card-text">@item.text</p>
+        <p class="card-text">Deadline: @item.deadLine</p>
+        <a href="#" class="btn btn-primary">Delete</a>
+      </div>
+    </div>
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*@model ToDoList.Models.TaskModel
+@{
+    ViewData["Title"] = "Список пользователей";
+}
+<form asp-action = "Index" asp-controller = "Task">
+    <div class="form-group">
+        <label asp-for="text"></label>
+        <input type="text" asp-for="text"class="form-control form-control-sm"/>
+    </div>
+
+</form>*@

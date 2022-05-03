@@ -1,0 +1,12 @@
+﻿@model ToDoList.Models.TaskModel
+
+<div class="card">
+      <div class="card-body">
+        <p class="card-text">Do you want to delete the Task @Model.text?</p>
+        <form  method="post" asp-action="Delete">
+        <a href="/Task/Delete?id=@{@Model.idTask}&ok=delete" class="btn btn-primary">Yes</a>
+        <a href="https://localhost:5001/Task" class="btn btn-primary">No</a>
+        </form>
+      </div>
+    </div>
+<p></p>

@@ -1,0 +1,12 @@
+﻿@model ToDoList.Models.CategoryModel
+
+<div class="card">
+      <div class="card-body">
+        <p class="card-text">Do you want to delete a category @Model.nameCategory?</p>
+        <form  method="post" asp-action="Delete">
+        <a href="/Category/Delete?id=@{@Model.idCategory}&ok=delete" class="btn btn-primary">Yes</a>
+        <a href="https://localhost:5001/Category" class="btn btn-primary">No</a>
+        </form>
+      </div>
+    </div>
+<p></p>
