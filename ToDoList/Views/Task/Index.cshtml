@@ -2,11 +2,23 @@
 @{
     DateTime dataTime = DateTime.Now;
 
+    string GetCategory(int idCategory)
+    {
+        foreach (var item in Model.categoryModels)
+        {
+            if(idCategory == item.idCategory)
+            {
+                return item.nameCategory; 
+            }
+        }
+        return "";
+    }
 }
 
 <form  method="post" asp-action="Create" class="border border-2 p-3">
     <div class="form-group">
-        <input type="text" name="text" class="form-control form-control-sm mb-4" required pattern="^.+$"/>
+        <div class="validation" asp-validation-summary="ModelOnly" style="color: red"></div>
+        <input type="text" name="text" class="form-control form-control-sm mb-4" value = "@Model.task.text" />
     </div>
         <label>Category: </label>
         <select name = "idCategory" class="form-select form-select-sm" aria-label=".form-select-sm example">
@@ -26,29 +38,70 @@
         </select>
         <input type = "submit" value="Create" class="btn btn-primary"/>
 </form>
-<h3 class="text-center">ActiveTasks</h3>
+<h3 class="text-center">Current Tasks</h3>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">Text</th>
+      <th scope="col">Deadline</th>
+      <th scope="col">Category</th>
+      <th scope="col">Priority</th>
+      <th scope="col">Action</th>
+      <th scope="col">Do</th>
+    </tr>
+  </thead>
+  <tbody>
 @foreach (var item in Model.activeTaskList)
 {
-    <div class="card">
+    @*<div class="card">
       <div class="card-body">
         <p class="card-text">@item.text</p>
         <p class="card-text">Deadline: @item.deadLine</p>
+        <label name = "check">Completed</label>
+        <input type="checkbox" name = "check" id="myCheck" class="@item.idTask" onclick="myFunction()">
         <a href="/Task/Delete?id=@{@item.idTask}" class="btn btn-primary">Delete</a>
-        <input type="checkbox" id="myCheck" class="@item.idTask" onclick="myFunction()">
       </div>
-    </div>
+    </div>*@
+    <tr>
+      <td>@item.text</td>
+      <td>@item.deadLine</td>
+      <td>@GetCategory(@item.idCategory)</td>
+      <td>@item.mark</td>
+      <td><a href="/Task/Edit?id=@{@item.idTask}">Edit</a> | <a href="/Task/Delete?id=@{@item.idTask}">Delete</a></td>
+      <td><input type="checkbox" name = "check" id="CheckNotDone" class="@item.idTask" onclick="FunctionDone()"></td>
+    </tr>
 }
+  </tbody>
+</table>
+
 <h3 class="text-center">Completed Tasks</h3>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">Text</th>
+      <th scope="col">Deadline</th>
+      <th scope="col">Category</th>
+      <th scope="col">Priority</th>
+      <th scope="col">Action</th>
+      <th scope="col">Do</th>
+    </tr>
+  </thead>
+  <tbody>
 @foreach (var item in Model.completedTaskList)
 {
-    <div class="card">
-      <div class="card-body">
-        <p class="card-text">@item.text</p>
-        <p class="card-text">Deadline: @item.deadLine</p>
-        <a href="#" class="btn btn-primary">Delete</a>
-      </div>
-    </div>
+    <tr>
+      <td>@item.text</td>
+      <td>@item.deadLine</td>
+      <td>@GetCategory(@item.idCategory)</td>
+      <td>@item.mark</td>
+      <td><a href="/Task/Delete?id=@{@item.idTask}">Delete</a></td>
+      <td><input type="checkbox" name = "check" id="CheckDone"  class="@item.idTask" checked onclick="FunctionNotDone()"></td>
+    </tr>
 }
+
+  </tbody>
+</table>
+
 
 
 

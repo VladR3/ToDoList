@@ -38,11 +38,6 @@ namespace ToDoList.Models
             {
                 var sqlQuery = "INSERT INTO Category (nameCategory) VALUES(@nameCategory)";
                 db.Execute(sqlQuery, category);
-
-                // если мы хотим получить id добавленного пользователя
-                //var sqlQuery = "INSERT INTO Users (Name, Age) VALUES(@Name, @Age); SELECT CAST(SCOPE_IDENTITY() as int)";
-                //int? userId = db.Query<int>(sqlQuery, user).FirstOrDefault();
-                //user.Id = userId.Value;
             }
         }
 

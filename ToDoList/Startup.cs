@@ -17,10 +17,10 @@ namespace ToDoList
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            string connectionString = "Server=DESKTOP-CJ79M32;Database=ToDoList;User ID=vlad;Password=";
+            string connectionString = "Server=DESKTOP-CJ79M32;Database=ToDoList;User ID=vlad;Password=varkobl09var";
             services.AddTransient<ITaskProvider, TaskRepository>(provider => new TaskRepository(connectionString));
             services.AddTransient<ICategoryProvider, CategoryRepository>(provider => new CategoryRepository(connectionString));
-            //services.AddAutoMapper(typeof(Startup));
+            services.AddAutoMapper(typeof(Startup));
             services.AddControllersWithViews();
         }
 

@@ -12,12 +12,12 @@ namespace ToDoList.Models
         public List<TaskModel> completedTaskList { get; set; }
         public List<CategoryModel> categoryModels { get; set; }
 
-        public TaskMV(TaskModel task, List<TaskModel> activeTaskList, List<TaskModel> completedTaskLis, List<CategoryModel> categoryModels)
-        {
-            this.task = task;
-            this.activeTaskList = activeTaskList;
-            this.completedTaskList = completedTaskLis;
-            this.categoryModels = categoryModels;
-        }
+        //public TaskMV(TaskModel task, List<TaskModel> activeTaskList, List<TaskModel> completedTaskLis, List<CategoryModel> categoryModels)
+        //{
+        //    this.task = task;
+        //    this.activeTaskList = activeTaskList;
+        //    this.completedTaskList = completedTaskLis;
+        //    this.categoryModels = categoryModels;
+        //}
     }
 }

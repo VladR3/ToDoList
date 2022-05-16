@@ -1,9 +1,11 @@
-﻿using Business.entities;
+﻿using AutoMapper;
+using Business.entities;
 using Business.providers;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using ToDoList.Models;
 using ToDoList.ModelViews;
+using ToDoList.Validation;
 
 namespace ToDoList.Controllers
 {
@@ -13,12 +15,13 @@ namespace ToDoList.Controllers
 
         private readonly ITaskProvider taskProvider;
         private readonly ICategoryProvider categoryProvider;
-        //private readonly IMapper mapper;
-        public CategoryController(ITaskProvider taskProvider, ICategoryProvider categoryProvider)
+        private readonly IMapper mapper;
+        private ValidationCategory validationCategory = new();
+        public CategoryController(ITaskProvider taskProvider, ICategoryProvider categoryProvider, IMapper mapper)
         {
             this.taskProvider = taskProvider;
             this.categoryProvider = categoryProvider;
-            //this.mapper = mapper;
+            this.mapper = mapper;
         }
 
         public IActionResult Index()
@@ -102,17 +105,19 @@ namespace ToDoList.Controllers
         public ActionResult Delete(int id)
         {
             categoryProvider.Delete(id);
-            //var categoryList = categoryProvider.GetCategories();
-            //List<CategoryModel> categoryListM = new List<CategoryModel>(categoryList.Count);
-            //for (int i = 0; i < categoryList.Count; i++)
-            //{
-            //    CategoryModel categoryModel = new CategoryModel();
-            //    categoryModel.idCategory = categoryList[i].idCategory;
-            //    categoryModel.nameCategory = categoryList[i].nameCategory;
-            //    categoryListM.Add(categoryModel);
-            //}
-            //CategoryMV categoryMV = new(new(), categoryListM);
             return RedirectToAction("Index");
         }
     }
 }
+
+
+//var categoryList = categoryProvider.GetCategories();
+//List<CategoryModel> categoryListM = new List<CategoryModel>(categoryList.Count);
+//for (int i = 0; i < categoryList.Count; i++)
+//{
+//    CategoryModel categoryModel = new CategoryModel();
+//    categoryModel.idCategory = categoryList[i].idCategory;
+//    categoryModel.nameCategory = categoryList[i].nameCategory;
+//    categoryListM.Add(categoryModel);
+//}
+//CategoryMV categoryMV = new(new(), categoryListM);

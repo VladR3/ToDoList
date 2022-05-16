@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Data.SqlClient;
+using System.ComponentModel.DataAnnotations;
 
 namespace ToDoList.Models
 {

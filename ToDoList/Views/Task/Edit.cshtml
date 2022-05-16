@@ -1,0 +1,48 @@
+﻿@model ToDoList.ModelViews.TaskEditMV
+@{
+
+}
+<form  method="post" asp-action="Edit" class="border border-2 p-3">
+    <div class="form-group">
+        <div class="validation" asp-validation-summary="ModelOnly" style="color: red"></div>
+         <input type="text" name="idTask" class="form-control form-control-sm" value = "@Model.task.idTask" style="visibility:hidden"/>
+        <input type="text" name="text" class="form-control form-control-sm mb-4" value = "@Model.task.text"/>
+    </div>
+    <div>
+        <label>Category: </label>
+        <select name = "idCategory" class="form-select form-select-sm" aria-label=".form-select-sm example">
+            @foreach (var item in Model.categories)
+                {
+                    if(@item.idCategory == @Model.task.idCategory)
+                    {
+                        <option value="@item.idCategory" selected>@item.nameCategory</option>
+                    }
+                    else
+                    {
+                        <option value="@item.idCategory">@item.nameCategory</option>
+                    }
+                } 
+        </select>
+    </div>
+    <div>
+        <label class="ml-3">Deadline: @Model.task.deadLine</label>
+        <input type="datetime-local" id="dateUpdate" name = "deadLine" value=@Model.task.deadLine/>
+    </div>
+    <div>
+        <label class="ml-3">Priority: </label>
+        <select name = "mark" class="form-select form-select-sm" aria-label=".form-select-sm example">
+            @for(var i = 1; i < 5; i++)
+            {
+                if(i == @Model.task.mark)
+                {
+                    <option value="@i" selected>@i</option>
+                }
+                else
+                {
+                    <option value="@i">@i</option>
+                }
+            }
+        </select>
+    </div>
+        <input type = "submit" value="Save" class="btn btn-primary"/>
+</form>

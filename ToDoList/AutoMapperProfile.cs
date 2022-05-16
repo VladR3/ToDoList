@@ -9,9 +9,10 @@ namespace ToDoList
     {
         public AutoMapperProfile()
         {
-            //CreateMap<Task, TaskMV>();
-            //CreateMap<List<Task>, List<TaskModel>>();
-            //CreateMap<List<Category>, List<CategoryModel>>();
+            
+            CreateMap<Task,TaskModel>();
+            CreateMap<Category, CategoryModel>();
+            CreateMap<TaskModel, Task>();
         }
     }
 }

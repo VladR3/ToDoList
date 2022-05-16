@@ -48,7 +48,7 @@ namespace ToDoList.Models
                     var sqlQuery = "INSERT INTO Task (text, dateOfCreate, mark, idCategory, status, deadline) VALUES(@text, @dateOfCreate, @mark, @idCategory, @status, @deadline)";
                     db.Execute(sqlQuery, task);
 
-                    // если мы хотим получить id добавленного пользователя
+                    
                     //var sqlQuery = "INSERT INTO Users (Name, Age) VALUES(@Name, @Age); SELECT CAST(SCOPE_IDENTITY() as int)";
                     //int? userId = db.Query<int>(sqlQuery, user).FirstOrDefault();
                     //user.Id = userId.Value;
@@ -73,11 +73,19 @@ namespace ToDoList.Models
                 }
             }
 
-        public void Perform(Task task, int id)
+        public void Perform(Task task, int id, string status)
         {
             using (IDbConnection db = new SqlConnection(connectionString))
             {
-                var sqlQuery = "UPDATE Task SET status = 1 WHERE idTask = @idTask";
+                var sqlQuery = "";
+                if (status == "notDone")
+                {
+                    sqlQuery = "UPDATE Task SET status = 1 WHERE idTask = @idTask";
+                }
+                else
+                {
+                    sqlQuery = "UPDATE Task SET status = 0 WHERE idTask = @idTask";
+                }
                 db.Execute(sqlQuery, task);
             }
         }

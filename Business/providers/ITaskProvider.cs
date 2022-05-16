@@ -14,6 +14,6 @@ namespace Business.providers
         List<Task> GetActiveTasks();
         List<Task> GetCompletedTasks();
         void Update(Task task);
-        void Perform(Task task,int id);
+        void Perform(Task task,int id, string status);
     }
 }
